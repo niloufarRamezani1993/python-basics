@@ -1,8 +1,10 @@
 from math import floor
 import math
+from persiantools.jdatetime import JalaliDateTime
+import datetime, pytz
 from datetime import datetime 
 import pprint
-
+from typing import List,Dict , Union
 
 
 
@@ -84,32 +86,90 @@ import pprint
 
 
 # with while and for :
-students = []
-index = 0
-average = 0
-for i in range(3):
+# students = []
+# index = 0
+# average = 0
+# for i in range(3):
 
-    first_name = input("what's your name?")
-    last_name = input("what's your last name?")
-    birth_year = int(input("tell me about your birth yaer"))
-    gpa = float(input("what is your GPA" ))
+#     first_name = input("what's your name?")
+#     last_name = input("what's your last name?")
+#     birth_year = int(input("tell me about your birth yaer"))
+#     gpa = float(input("what is your GPA" ))
 
-    student= {
-        "name" : first_name ,
-        "family" : last_name , 
-        "birth_year" : birth_year ,
-        "gpa" : gpa
-    }
+#     student= {
+#         "name" : first_name ,
+#         "family" : last_name , 
+#         "birth_year" : birth_year ,
+#         "gpa" : gpa
+#     }
 
-    students.append(student)
+#     students.append(student)
 
-while index < 3 :
-        id = students[index]["name"] + " " + students[index]["family"]
-        gpa_of_three = students[index]["gpa"]
-        average = average + gpa_of_three
-        index += 1
-        pprint.pprint(id.upper())
-        print(average)
+# while index < 3 :
+#         id = students[index]["name"] + " " + students[index]["family"]
+#         gpa_of_three = students[index]["gpa"]
+#         average = average + gpa_of_three
+#         index += 1
+#         pprint.pprint(id.upper())
+#         print(average)
 
-pprint.pprint(students)
-print(average / len(students))
+# pprint.pprint(students)
+# print(average / len(students))
+
+
+
+students : List[Dict[str , Union[str , int , float]]] = []
+
+i: int = int(input("how many students there are?"))
+
+
+
+
+for n in range(i)  :
+
+    first_name: str = input("First name : " ).capitalize()
+    last_name: str = input("Last name : " ).capitalize()
+    birth_year: int = int(input("birth year : " ) )
+    grade: float = float(input("Average : " ) )
+    students.append({
+
+        "first name" : first_name ,
+        "last name" : last_name ,
+        "birth year" : birth_year ,
+        "grade" : grade
+    })
+    i += 1
+
+def upper_name(x:Dict[str , Union[str , int , float]]):
+    """
+    take first name and last name and 
+    convert it to uppercase 
+    """
+    
+    for student in students:
+       full_name = f"{student['first name']} {student['last name']}"
+       print(full_name.upper())
+
+def age(age:Dict[str , Union[str , int , float]])->Dict[str , Union[str , int , float]]:
+    """
+    calculate the ages
+    """
+    birthdate = JalaliDateTime.now().year
+    
+    for student in students:
+        age = birthdate - student["birth year"]
+        print( age)
+        
+def average(gpa:Dict[str , Union[str , int , float]]):
+    """
+    calculate GPA
+    """
+    grade = 0
+    for student in students:
+        grade = grade + student["grade"]
+
+    print(grade/len(students))
+
+upper_name(students)
+age(students)
+average(students)
