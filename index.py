@@ -1,10 +1,12 @@
 from math import floor
 import math
+from math import factorial
 from persiantools.jdatetime import JalaliDateTime
 import datetime, pytz
 from datetime import datetime 
 import pprint
 from typing import List,Dict , Union
+import time
 
 
 
@@ -117,59 +119,89 @@ from typing import List,Dict , Union
 # print(average / len(students))
 
 
+# Binary search 
+start_time = time.time()
+numbers = [1 , 3 ,5 , 7 , 9]
+num = int(input("say a odd nubmber between 0 to 9  "))
 
-students : List[Dict[str , Union[str , int , float]]] = []
+def binary_search(x) :
+    left = 0
+    right = len(numbers)-1
+    while left <= right :
+        mid = (left + right)//2
+        if numbers[mid] == num :
+            print("eyval ine")
+            return
+        elif numbers[mid] < num:
+            left = mid +1
+        else: 
+            right = mid -1
 
-i: int = int(input("how many students there are?"))
+    return "not found"
+result = binary_search(num)
+print(result)
 
 
+# # سوال:
+# فرض کن یک لیست مرتب شده به نام numbers دارید:
+
+# python
+# Copy code
+# numbers = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+# یک عدد target می‌دهیم که در این لیست جستجو شود. کد باینری سرچ را بنویسید که بگوید آیا عدد target در لیست وجود دارد یا خیر و اگر موجود بود، اندیس آن را چاپ کند.
+
+# ورودی: عدد target (مثلاً 12)
+
+# خروجی:
+
+# اگر عدد موجود بود: "Found at index X"
+# # اگر عدد موجود نبود: "Not found" 
 
 
-for n in range(i)  :
+numbers = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
 
-    first_name: str = input("First name : " ).capitalize()
-    last_name: str = input("Last name : " ).capitalize()
-    birth_year: int = int(input("birth year : " ) )
-    grade: float = float(input("Average : " ) )
-    students.append({
+num = int(input("Enter an even number between 0 to 20 ? "+"\n"))
 
-        "first name" : first_name ,
-        "last name" : last_name ,
-        "birth year" : birth_year ,
-        "grade" : grade
-    })
-    i += 1
-
-def upper_name(x:Dict[str , Union[str , int , float]]):
-    """
-    take first name and last name and 
-    convert it to uppercase 
-    """
+def search(num):
+    left = 0
+    right =len(numbers)-1
+    while left <= right:
+        mid = (left + right)//2
+        if numbers[mid] == num:
+            print(num , " is here")
+            return
+        elif numbers[mid] < num :
+            left = mid + 1
+        else:
+            right = mid - 1
     
-    for student in students:
-       full_name = f"{student['first name']} {student['last name']}"
-       print(full_name.upper())
+    print("peyda nashod")
+    return
 
-def age(age:Dict[str , Union[str , int , float]])->Dict[str , Union[str , int , float]]:
-    """
-    calculate the ages
-    """
-    birthdate = JalaliDateTime.now().year
-    
-    for student in students:
-        age = birthdate - student["birth year"]
-        print( age)
-        
-def average(gpa:Dict[str , Union[str , int , float]]):
-    """
-    calculate GPA
-    """
-    grade = 0
-    for student in students:
-        grade = grade + student["grade"]
+javab = search(num)
+end_time = time.time()
+ex_time = start_time - end_time
+print(javab)
+print(f"the time is {ex_time} seconds")
 
-    print(grade/len(students))
 
-upper_name(students)
-age(students)
-average(students)
+# یک تابع بنویس که nامین عدد فیبوناچی را محاسبه کند. دنباله فیبوناچی به این صورت است:
+
+# F(0) = 0
+# F(1) = 1
+# F(n) = F(n-1) + F(n-2) برای n > 1
+# تابع شما باید برای هر عدد n که وارد می‌شود، nامین عدد فیبوناچی را محاسبه کند.
+fibonacci = [ ]
+
+
+def fibonacci(n):
+    if n < 1 :
+        print("stop")
+    while n > 1:
+       f = (n-1) + (n -2 )
+       if fibonacci[-1] < 100 :
+         n = int(input("a number"))
+
+
+
+
